@@ -2,6 +2,7 @@ package nl.vinyamar.cricforce.backend;
 
 import com.github.joschi.dropwizard.java8.Java8Bundle;
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import nl.vinyamar.cricforce.backend.resources.PlayerResource;
