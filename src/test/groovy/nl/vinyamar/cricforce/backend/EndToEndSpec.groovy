@@ -1,13 +1,8 @@
-package nl.vinyamar.cricforce
+package nl.vinyamar.cricforce.backend
 
 import com.sun.jersey.api.client.Client
-import io.dropwizard.cli.ServerCommand
-import io.dropwizard.testing.junit.DropwizardAppRule
-import nl.vinyamar.cricforce.backend.CricForceApplication
-import nl.vinyamar.cricforce.backend.CricForceConfiguration
-import nl.vinyamar.cricforce.backend.config.Test
+import com.sun.jersey.api.client.WebResource
 import nl.vinyamar.cricforce.backend.domain.Player
-import org.junit.ClassRule
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import spock.lang.Shared
@@ -18,26 +13,30 @@ import javax.ws.rs.core.MediaType
 class EndToEndSpec extends Specification {
 
     @Shared
-    def jdbcTemplate
+    JdbcTemplate jdbcTemplate
+    @Shared
+    def application
 
-    @ClassRule
-    public static final RULE =
-            new DropwizardAppRule<CricForceConfiguration>(CricForceApplication.class, new ClassPathResource("test.yml").path);
 
-    def setup() {
-        jdbcTemplate = new JdbcTemplate(CricForceConfiguration.dataSource)
+    def setupSpec() {
+        application = new CricForceApplication()
+        application.run("server", new ClassPathResource("test.yml").file.absolutePath)
+        jdbcTemplate = new JdbcTemplate(application.context.getBean("dataSource"))
     }
 
     def "return a list with all playernames in JSON"() {
       setup:
         setupTestPlayers()
-        CricForceApplication.main("server")
-        def client = new Client()
-        def resource = client.resource("http://localhost:8080/players")
       when:
-        def response = resource.accept(MediaType.APPLICATION_JSON_TYPE).get(List.class)
+        def response = playerResource().accept(MediaType.APPLICATION_JSON_TYPE).get(List.class)
       then:
         response == ["M de Vries", "RQ  Prenen"]
+    }
+
+    private WebResource playerResource() {
+        def client = new Client()
+        def resource = client.resource("http://localhost:9000/players")
+        resource
     }
 
     def setupTestPlayers() {

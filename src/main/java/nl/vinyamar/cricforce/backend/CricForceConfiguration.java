@@ -1,20 +1,15 @@
 package nl.vinyamar.cricforce.backend;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
-import nl.vinyamar.cricforce.backend.config.Test;
-
-import javax.sql.DataSource;
 
 public class CricForceConfiguration extends Configuration {
 
-    private static DataSource applicationDatasource;
+    @JsonProperty
+    private String profiles;
 
-    public static DataSource getDataSource() {
-        if (applicationDatasource == null) {
-            applicationDatasource = Test.DataSource();
-        }
-        return applicationDatasource;
+    public String getProfiles() {
+        return profiles;
     }
-
 
 }

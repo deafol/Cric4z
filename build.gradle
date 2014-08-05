@@ -20,6 +20,7 @@ repositories {
 
 ext {
     dropwizardVersion = '0.7.1'
+    springVersion = '4.0.6.RELEASE'
 }
 
 dependencies {
@@ -32,7 +33,8 @@ dependencies {
     compile 'com.github.joschi:dropwizard-java8:0.2.0'
     compile 'com.github.joschi:dropwizard-java8-auth:0.2.0'
     compile 'com.github.joschi:dropwizard-java8-jdbi:0.2.0'
-    compile 'org.springframework:spring-jdbc:4.0.6.RELEASE'
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
 }
 
 shadowJar {
