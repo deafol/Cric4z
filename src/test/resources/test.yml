@@ -2,7 +2,7 @@ profiles: test
 server:
   applicationConnectors:
   - type: http
-    port: 9000
+    port: ${applicationPort}
   adminConnectors:
   - type: http
-    port: 9001
+    port: ${adminPort}

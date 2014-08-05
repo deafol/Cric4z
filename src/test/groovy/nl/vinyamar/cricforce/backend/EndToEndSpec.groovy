@@ -2,6 +2,7 @@ package nl.vinyamar.cricforce.backend
 
 import com.sun.jersey.api.client.Client
 import com.sun.jersey.api.client.WebResource
+import groovy.text.GStringTemplateEngine
 import nl.vinyamar.cricforce.backend.domain.Player
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
@@ -20,8 +21,18 @@ class EndToEndSpec extends Specification {
 
     def setupSpec() {
         application = new CricForceApplication()
-        application.run("server", new ClassPathResource("test.yml").file.absolutePath)
+        application.run("server", createTestYml())
         jdbcTemplate = new JdbcTemplate(application.context.getBean("dataSource"))
+    }
+
+    def createTestYml() {
+        def binding = ["applicationPort":9000, "adminPort":9001]
+        def templateFile = new File(new ClassPathResource("test.yml").file.absolutePath)
+        def fileContents = new GStringTemplateEngine().createTemplate(templateFile).make(binding).toString()
+        File tempFile = File.createTempFile('config', '.yml')
+        tempFile.deleteOnExit()
+        tempFile.write fileContents
+        tempFile.absolutePath
     }
 
     def "return a list with all playernames in JSON"() {
@@ -35,6 +46,7 @@ class EndToEndSpec extends Specification {
 
     private WebResource playerResource() {
         def client = new Client()
+        //TODO configure port form environment/spring config
         def resource = client.resource("http://localhost:9000/players")
         resource
     }

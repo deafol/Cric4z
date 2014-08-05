@@ -27,6 +27,11 @@ public class CricForceApplication extends Application<CricForceConfiguration> {
 
     @Override
     public void run(CricForceConfiguration configuration, Environment environment) throws Exception {
+//        DefaultServerFactory serverFactory = (DefaultServerFactory) configuration.getServerFactory();
+//        List<ConnectorFactory> applicationConnectors = serverFactory.getApplicationConnectors();
+//        HttpConnectorFactory connectorFactory = (HttpConnectorFactory) applicationConnectors.get(0);
+//        System.out.println(connectorFactory.getPort());
+//        connectorFactory.setPort(9002);
         setupSpringContext(configuration);
         registerResources(environment);
     }
