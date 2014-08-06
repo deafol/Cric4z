@@ -4,7 +4,7 @@ import com.github.joschi.dropwizard.java8.Java8Bundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import nl.vinyamar.cricforce.backend.config.MainConfiguration;
+import nl.vinyamar.cricforce.backend.springconfig.MainConfiguration;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import javax.ws.rs.Path;
