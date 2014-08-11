@@ -18,7 +18,7 @@ public class LocalConfiguration implements DBConfiguration {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
-                .addScript("db-schema.sql")
+                .addScript("db-create-and-fill.sql")
                 .build();
     }
 
