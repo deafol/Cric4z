@@ -1,16 +1,22 @@
 package nl.vinyamar.cricforce.backend
 
+import com.google.common.base.Charsets
+import com.google.common.io.Resources
 import com.sun.jersey.api.client.Client
 import com.sun.jersey.api.client.WebResource
 import groovy.text.GStringTemplateEngine
 import nl.vinyamar.cricforce.backend.domain.Player
 import nl.vinyamar.cricforce.backend.util.NetUtils
+import nl.vinyamar.cricforce.backend.util.TestUtils
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.ws.rs.core.MediaType
+import java.nio.charset.Charset
+
+import static nl.vinyamar.cricforce.backend.util.TestUtils.*
 
 class EndToEndSpec extends Specification {
 
@@ -28,6 +34,7 @@ class EndToEndSpec extends Specification {
         application = new CricForceApplication()
         application.run("server", createTestYml())
         jdbcTemplate = new JdbcTemplate(application.context.getBean("dataSource"))
+        setupTestPlayers()
     }
 
     private ArrayList<Integer> getFreePorts() {
@@ -47,15 +54,25 @@ class EndToEndSpec extends Specification {
     }
 
     def "return a list with all playernames in JSON"() {
-      setup:
-        setupTestPlayers()
       when:
-        def response = playerResource().accept(MediaType.APPLICATION_JSON_TYPE).get(List.class)
+        def response = playersResource().accept(MediaType.APPLICATION_JSON_TYPE).get(String.class)
       then:
-        response == ["M de Vries", "RQ  Prenen"]
+        response == fixture("expected/players.json")
+
     }
 
-    private WebResource playerResource() {
+    def "return player with id 1 in JSON"() {
+      when:
+        def response = playerResource(1).accept(MediaType.APPLICATION_JSON_TYPE).get(String.class)
+      then:
+        response == fixture("expected/player1.json")
+    }
+
+    private WebResource playerResource(id) {
+        new Client().resource("http://localhost:$appPort/player/$id")
+    }
+
+    private WebResource playersResource() {
         new Client().resource("http://localhost:$appPort/players")
     }
 

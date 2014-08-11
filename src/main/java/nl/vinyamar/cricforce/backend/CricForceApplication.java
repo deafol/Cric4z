@@ -1,6 +1,8 @@
 package nl.vinyamar.cricforce.backend;
 
 import com.github.joschi.dropwizard.java8.Java8Bundle;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.server.linking.LinkFilter;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -27,11 +29,7 @@ public class CricForceApplication extends Application<CricForceConfiguration> {
 
     @Override
     public void run(CricForceConfiguration configuration, Environment environment) throws Exception {
-//        DefaultServerFactory serverFactory = (DefaultServerFactory) configuration.getServerFactory();
-//        List<ConnectorFactory> applicationConnectors = serverFactory.getApplicationConnectors();
-//        HttpConnectorFactory connectorFactory = (HttpConnectorFactory) applicationConnectors.get(0);
-//        System.out.println(connectorFactory.getPort());
-//        connectorFactory.setPort(9002);
+        environment.jersey().property(ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS, LinkFilter.class);
         setupSpringContext(configuration);
         registerResources(environment);
     }
@@ -53,7 +51,7 @@ public class CricForceApplication extends Application<CricForceConfiguration> {
 
     private void registerResources(Environment environment) {
         Map<String, Object> resourceBeans = context.getBeansWithAnnotation(Path.class);
-        for(Map.Entry<String,Object> bean : resourceBeans.entrySet()) {
+        for (Map.Entry<String, Object> bean : resourceBeans.entrySet()) {
             environment.jersey().register(bean.getValue());
         }
     }

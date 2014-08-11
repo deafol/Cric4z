@@ -10,6 +10,7 @@ buildscript {
 
 sourceCompatibility = 1.8
 targetCompatibility =  1.8
+//TODO configure set with groovy testdir
 
 version = '0.1'
 
@@ -29,6 +30,7 @@ dependencies {
     testCompile group: 'io.dropwizard', name: 'dropwizard-testing', version: dropwizardVersion
     testCompile 'com.h2database:h2:1.3.167'
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile 'com.sun.jersey:jersey-server-linking:1.18.1'
     compile 'org.codehaus.groovy:groovy-all:2.1.5'
     compile 'com.github.joschi:dropwizard-java8:0.2.0'
     compile 'com.github.joschi:dropwizard-java8-auth:0.2.0'
@@ -38,4 +40,5 @@ dependencies {
 }
 
 shadowJar {
+    //TODO configure executable jar (Main-class)
 }

@@ -1,12 +1,37 @@
 package nl.vinyamar.cricforce.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.jersey.server.linking.Ref;
+
+import java.net.URI;
+
 public class Player {
 
-    private String firstName;
+    @Ref("player/{id}")
+    @JsonProperty
+    private URI player;
 
-    private String lastName;
+    public long getId() {
+        return id;
+    }
 
-    private String prefix;
+    public void setId(long id) {
+        this.id = id;
+    }
 
-    private String initials;
+    @JsonProperty
+    public long id;
+
+    @JsonProperty
+    public String firstName;
+
+    @JsonProperty
+    public String lastName;
+
+    @JsonProperty
+    public String prefix;
+
+    @JsonProperty
+    public String initials;
+
 }
