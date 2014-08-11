@@ -1,22 +1,18 @@
 package nl.vinyamar.cricforce.backend
 
-import com.google.common.base.Charsets
-import com.google.common.io.Resources
 import com.sun.jersey.api.client.Client
 import com.sun.jersey.api.client.WebResource
 import groovy.text.GStringTemplateEngine
 import nl.vinyamar.cricforce.backend.domain.Player
 import nl.vinyamar.cricforce.backend.util.NetUtils
-import nl.vinyamar.cricforce.backend.util.TestUtils
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.core.JdbcTemplate
 import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.ws.rs.core.MediaType
-import java.nio.charset.Charset
 
-import static nl.vinyamar.cricforce.backend.util.TestUtils.*
+import static nl.vinyamar.cricforce.backend.util.TestUtils.fixture
 
 class EndToEndSpec extends Specification {
 

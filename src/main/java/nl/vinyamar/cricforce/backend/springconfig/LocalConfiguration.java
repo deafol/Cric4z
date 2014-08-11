@@ -9,9 +9,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("test")
-public class TestConfiguration implements DBConfiguration {
+@Profile("local")
+public class LocalConfiguration implements DBConfiguration {
 
+    //TODO make local filesystem db configured in .yml
     @Bean
     @Override
     public DataSource dataSource() {
