@@ -51,11 +51,11 @@ public class Players {
         @Override
         public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
             Player player = new Player();
-            player.id = rs.getLong(1);
-            player.firstName = rs.getString(2);
-            player.lastName = rs.getString(3);
-            player.prefix = rs.getString(4);
-            player.initials = rs.getString(5);
+            player.setId(rs.getLong(1));
+            player.setFirstName(rs.getString(2));
+            player.setLastName(rs.getString(3));
+            player.setPrefix(rs.getString(4));
+            player.setInitials(rs.getString(5));
             players.add(player);
             return player;
         }
