@@ -1,5 +1,6 @@
 package nl.vinyamar.cricforce.backend;
 
+import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.github.joschi.dropwizard.java8.Java8Bundle;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.server.linking.LinkFilter;
@@ -24,6 +25,7 @@ public class CricForceApplication extends Application<CricForceConfiguration> {
 
     @Override
     public void initialize(Bootstrap<CricForceConfiguration> bootstrap) {
+        bootstrap.addBundle(new ConfiguredAssetsBundle("/webapp/","/test"));
         bootstrap.addBundle(new Java8Bundle());
     }
 

@@ -1,1 +1,4 @@
 profiles: local
+webapp:
+  overrides:
+    /test: src/main/resources/webapp/

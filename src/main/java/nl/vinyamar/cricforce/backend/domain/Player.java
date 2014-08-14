@@ -1,6 +1,5 @@
 package nl.vinyamar.cricforce.backend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.jersey.server.linking.Ref;
 import lombok.EqualsAndHashCode;
