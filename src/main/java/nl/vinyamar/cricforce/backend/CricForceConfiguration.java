@@ -16,7 +16,7 @@ public class CricForceConfiguration extends Configuration implements AssetsBundl
     @JsonProperty
     @NotNull
     @Valid
-    private AssetsConfiguration webapp;
+    private AssetsConfiguration app;
 
     public String getProfiles() {
         return profiles;
@@ -24,6 +24,6 @@ public class CricForceConfiguration extends Configuration implements AssetsBundl
 
     @Override
     public AssetsConfiguration getAssetsConfiguration() {
-        return webapp;
+        return app;
     }
 }

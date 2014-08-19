@@ -1,7 +1,7 @@
 profiles: test
-webapp:
+app:
   overrides:
-    /: src/main/webapp
+    /: src/main/app
 server:
   applicationConnectors:
   - type: http
