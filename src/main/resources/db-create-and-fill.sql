@@ -5,4 +5,4 @@ create table Player (
   prefix varchar,
   initials varchar
 )
-as select * from csvread('C:\Projecten\web\Cric4z\src\main\resources\player.csv');
+as select * from csvread('src\main\resources\player.csv');

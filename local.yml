@@ -1,4 +1,4 @@
 profiles: local
 app:
   overrides:
-    /test: src/main/resources/app/
+    /app: src/main/resources/app/
