@@ -25,7 +25,7 @@ public class CricForceApplication extends Application<CricForceConfiguration> {
 
     @Override
     public void initialize(Bootstrap<CricForceConfiguration> bootstrap) {
-        bootstrap.addBundle(new ConfiguredAssetsBundle("/app/","/test"));
+        bootstrap.addBundle(new ConfiguredAssetsBundle("/app/","/app"));
         bootstrap.addBundle(new Java8Bundle());
     }
 
